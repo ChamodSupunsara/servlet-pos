@@ -63,8 +63,6 @@ public class CustomerServelt extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-
         PrintWriter printWriter=response.getWriter();
         response.setContentType("application/json");
 

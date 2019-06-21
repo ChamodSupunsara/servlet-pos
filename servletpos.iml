@@ -21,6 +21,6 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.17" level="application_server_libraries" />
     <orderEntry type="library" name="javax.json-1.0.2" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.6-bin" level="project" />
+    <orderEntry type="library" scope="TEST" name="mysql-connector-java-5.1.6-bin" level="project" />
   </component>
 </module>
