@@ -31,13 +31,10 @@ public class CustomerServelt extends HttpServlet {
         try {
             reader = Json.createReader(request.getReader());
             empObj=reader.readObject();
-
             String cusid = empObj.getString("id");
             String name = empObj.getString("name");
             String address = empObj.getString("address");
-            Integer salary = empObj.getInt("salary");
-
-            System.out.println(cusid);
+            Integer salary = Integer.parseInt(empObj.getString("salary"));
 
             Connection connection = dataSource.getConnection();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customer VALUES (?,?,?,?)");

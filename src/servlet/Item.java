@@ -33,8 +33,10 @@ public class Item extends HttpServlet {
 
             String itemid = itemObj.getString("code");
             String discription = itemObj.getString("description");
-            double unitprice = Double.parseDouble(itemObj.getString("unitPrice"));
-            int qtyonhand = Integer.parseInt(itemObj.getString("qtyOnHand"));
+            Double unitprice = Double.parseDouble(itemObj.getString("unitPrice"));
+            Integer qtyonhand = Integer.parseInt(itemObj.getString("qtyOnHand"));
+
+            System.out.println(qtyonhand);
 
             Connection connection = dataSource.getConnection();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO item VALUES (?,?,?,?)");
@@ -42,7 +44,7 @@ public class Item extends HttpServlet {
             pstm.setObject(2,discription);
             pstm.setObject(3,unitprice);
             pstm.setObject(4,qtyonhand);
-            boolean value=pstm.executeUpdate()>0;
+            boolean value = pstm.executeUpdate() > 0;
 
             if (value){
                 response.setStatus(HttpServletResponse.SC_CREATED);
@@ -76,7 +78,7 @@ public class Item extends HttpServlet {
 
             resultSet=statement.executeQuery(sql);
 
-            JsonArrayBuilder customers = Json.createArrayBuilder();
+            JsonArrayBuilder items = Json.createArrayBuilder();
 
             while(resultSet.next()){
 
@@ -91,10 +93,10 @@ public class Item extends HttpServlet {
                         .add("unitPrice", unitprice)
                         .add("qtyOnHand", qtyonhand)
                         .build();
-                customers.add(item);
+                items.add(item);
             }
 
-            printWriter.println(customers.build().toString());
+            printWriter.println(items.build().toString());
             connection.close();
 
         }catch (Exception ex){
@@ -133,8 +135,6 @@ public class Item extends HttpServlet {
             String discription = itemObj.getString("description");
             double unitprice = Double.parseDouble(itemObj.getString("unitPrice"));
             int qtyonhand = Integer.parseInt(itemObj.getString("qtyOnHand"));
-
-
 
             Connection connection = dataSource.getConnection();
             PreparedStatement pstm = connection.prepareStatement("update item set description=?, unitPrice=?, qtyOnHand=? where code=?");
